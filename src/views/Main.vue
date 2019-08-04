@@ -27,10 +27,10 @@
         </div>
     </div>
     <div class="main__contant">
-        <div class="main__card">
-            <img src="../assets/p1.png" alt="photo" class="main__photo">
-            <h6 class="main__card-header">Валентина, 75 років</h6>
-            <p class="main__card-text">Дитя, дай бабусі ліки від тиску за цим рецептом, але не дорогих, тих, що дешевші!</p>
+        <div  v-for="patient in patients" class="main__card">
+            <img :src="patient.srcImage" alt="photo" class="main__photo">
+            <h6 class="main__card-header">{{ patient.title }}</h6>
+            <p class="main__card-text">{{ patient.text }}</p>
         </div>
          <div class="main__btn-container">
             <a class="btn btn_small btn_first" v-on:click="a++, d--">Препарат 1</a>
@@ -56,42 +56,43 @@ export default {
                 {
                     title: "Валентина, 75 років",
                     text: "Дитя, дай бабусі ліки від тиску за цим рецептом, але не дорогих, тих, що дешевші!",
-                    linkToImage: "../assets/p1.png"
+                    srcImage: require("../assets/p1.png")
                 },
                 {
                     title: "Марія, 19 років",
                     text: "Бабуся приймає брендовий препарат від болю в суглобах, він допомагає, але занадто дорогий. У Вас є якісний аналог з нижчою ціною? Якщо ні — давайте бренд.",
-                    linkToImage: "../assets/p2.jpg"
+                    srcImage: require("../assets/p2.jpg")
                 },
                 {
                     title: "Степан, 61 рік",
                     text: "Спросоння відсунув гарячий чайник рукою та обпікся. У Вас всі ліки від опіків такі дорогі? Можна хороший препарат недорого?",
-                    linkToImage: "../assets/p3.jpg"
+                    srcImage: require("../assets/p3.jpg")
                 },
                 {
                     title: "Любов, 58 років",
                     text: "Лікар призначив препарат від артеріальної гіпертензії, а бренд дорого коштує. Тому мені потрібен аналог з хорошою ефективністю та приємною ціною.",
-                    linkToImage: "../assets/p4.jpg"
+                    srcImage: require("../assets/p4.jpg")
                 },
                 {
                     title: "Олександр, 20 років",
                     text: "Порекомендуйте ефективний препарат від болю в горлі за розумну ціну.",
-                    linkToImage: "../assets/p5.jpg"
+                    srcImage: require("../assets/p5.jpg")
                 },
                 {
                     title: "Ірина, 55 років",
                     text: "У мене часто невралгії, лікар призначив вітаміни групи В. Мені потрібен якісний аналог за прийнятною ціною.",
-                    linkToImage: "../assets/p6.jpg"
+                    srcImage: require("../assets/p6.jpg")
                 }
             ],
         }
     },
     methods: {
-         reload: function(){
-             this.a = 0,
-             this.b = 0,
-             this.c = 0,
-             this.d = 15
+
+        reload: function(){
+            this.a = 0,
+            this.b = 0,
+            this.c = 0,
+            this.d = 15
         }
     }
 }
@@ -222,6 +223,9 @@ export default {
     }
     &__btn-container {
         display: flex;
+    }
+    &__photo {
+        border-radius: 40px 40px 0 0;
     }
   }
 </style>
