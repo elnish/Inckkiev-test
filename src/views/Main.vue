@@ -3,7 +3,7 @@
     <div class="main__aside">
         <div class="main__aside__menu">
             <router-link to="/" class="main__btn-aside main__btn-aside_hover"><img src="../assets/Union.png" alt="home" class="main__aside-icon"></router-link>
-            <router-link to="/main" class="main__btn-aside main__btn-aside main__btn-aside_hover"><img src="../assets/Group.png" alt="home" class="main__aside-icon main__aside-icon_big"></router-link>
+            <div v-on:click="reload()" class="main__btn-aside main__btn-aside main__btn-aside_hover"><img src="../assets/Group.png" alt="home" class="main__aside-icon main__aside-icon_big"></div>
         </div>
         <div class="main__param-container">
             <p class="main__param-text">Параметры:</p>
@@ -28,7 +28,7 @@
     </div>
     <div class="main__contant">
         <div class="main__card">
-            <img src="../assets/image1.png" alt="photo" class="main__photo">
+            <img src="../assets/p1.png" alt="photo" class="main__photo">
             <h6 class="main__card-header">Валентина, 75 років</h6>
             <p class="main__card-text">Дитя, дай бабусі ліки від тиску за цим рецептом, але не дорогих, тих, що дешевші!</p>
         </div>
@@ -36,9 +36,6 @@
             <a class="btn btn_small btn_first" v-on:click="a++, d--">Препарат 1</a>
             <a class="btn btn_small btn_second" v-on:click="b++, d--">Препарат 2</a>
             <a class="btn btn_small btn_third" v-on:click="c++, d--">Препарат 3</a>
-            <!-- <Btn msg="Препарат 1" class="btn btn_small btn_first"></Btn>
-            <Btn msg="Препарат 1" class="btn btn_small btn_second"></Btn>
-            <Btn msg="Препарат 1" class="btn btn_small btn_third" v-on:click="a++" v-bind:a="a"></Btn> -->
         </div>
     </div>
    
@@ -46,21 +43,57 @@
 </template>
 
 <script>
-// import Btn from '@/components/Btn.vue'
 
 export default {
     name: 'main',
-    components: {
-        // Btn
-    },
     data(){
         return {
             a: 0,
             b: 0, 
             c: 0,
-            d: 15
+            d: 15,
+            patients: [
+                {
+                    title: "Валентина, 75 років",
+                    text: "Дитя, дай бабусі ліки від тиску за цим рецептом, але не дорогих, тих, що дешевші!",
+                    linkToImage: "../assets/p1.png"
+                },
+                {
+                    title: "Марія, 19 років",
+                    text: "Бабуся приймає брендовий препарат від болю в суглобах, він допомагає, але занадто дорогий. У Вас є якісний аналог з нижчою ціною? Якщо ні — давайте бренд.",
+                    linkToImage: "../assets/p2.jpg"
+                },
+                {
+                    title: "Степан, 61 рік",
+                    text: "Спросоння відсунув гарячий чайник рукою та обпікся. У Вас всі ліки від опіків такі дорогі? Можна хороший препарат недорого?",
+                    linkToImage: "../assets/p3.jpg"
+                },
+                {
+                    title: "Любов, 58 років",
+                    text: "Лікар призначив препарат від артеріальної гіпертензії, а бренд дорого коштує. Тому мені потрібен аналог з хорошою ефективністю та приємною ціною.",
+                    linkToImage: "../assets/p4.jpg"
+                },
+                {
+                    title: "Олександр, 20 років",
+                    text: "Порекомендуйте ефективний препарат від болю в горлі за розумну ціну.",
+                    linkToImage: "../assets/p5.jpg"
+                },
+                {
+                    title: "Ірина, 55 років",
+                    text: "У мене часто невралгії, лікар призначив вітаміни групи В. Мені потрібен якісний аналог за прийнятною ціною.",
+                    linkToImage: "../assets/p6.jpg"
+                }
+            ],
         }
     },
+    methods: {
+         reload: function(){
+             this.a = 0,
+             this.b = 0,
+             this.c = 0,
+             this.d = 15
+        }
+    }
 }
 </script>
 

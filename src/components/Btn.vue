@@ -9,8 +9,9 @@ export default {
   name: 'Btn',
   props: {
     msg: String,
-  },
 
+  },
+  
 }
 </script>
 
