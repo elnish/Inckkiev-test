@@ -8,7 +8,7 @@ export default new Vuex.Store({
     firstDrug: 0,
     secondDrug: 0,
     thirdDrug: 0,
-    max: 15
+    max: 6
   },
   getters: {
     firstDrug(state) {
