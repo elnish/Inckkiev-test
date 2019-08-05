@@ -23,7 +23,7 @@
             </div>
         </div>
         <div class="main__aside-footer">
-            <p class="main__aside-text">Осталось в очереди: <br/> <span class="main__aside-text main__aside-text_bold">{{ max }}</span>/15</p>
+            <p class="main__aside-text">Осталось в очереди: <br/> <span class="main__aside-text main__aside-text_bold">{{ max }}</span>/6</p>
         </div>
     </div>
     <!-- <div class="main__contant"> -->
@@ -141,7 +141,7 @@ export default {
             "reload"
         ]),
         next: function() {
-            if(this.max == 9) {
+            if(this.max == 0) {
                 this.$router.push({ path: 'final' })
             }
         },

@@ -51,7 +51,7 @@ export default new Vuex.Store({
       state.firstDrug = 0;
       state.secondDrug = 0;
       state.thirdDrug = 0;
-      state.max = 15;
+      state.max = 6;
     }
   },
   actions: {
