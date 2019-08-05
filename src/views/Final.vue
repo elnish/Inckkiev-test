@@ -33,9 +33,10 @@ import Btn from '@/components/Btn.vue'
 
 export default {
   name: 'final_easy',
-  components: {
+   components: {
     Btn
-  }
+  },
+  props: ['a']
 }
 </script>
 

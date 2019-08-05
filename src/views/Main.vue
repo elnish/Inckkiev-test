@@ -26,84 +26,148 @@
             <p class="main__aside-text">Осталось в очереди: <br/> <span class="main__aside-text main__aside-text_bold">{{ d }}</span>/15</p>
         </div>
     </div>
-    <div class="main__contant">
-        <div  v-for="patient in patients" class="main__card">
+    <!-- <div class="main__contant"> -->
+
+        <!-- <div v-for="patient in patients" v-bind:key="patient.id" v-show="patient.show" class="main__card">
             <img :src="patient.srcImage" alt="photo" class="main__photo">
             <h6 class="main__card-header">{{ patient.title }}</h6>
             <p class="main__card-text">{{ patient.text }}</p>
+        </div> -->
+
+        <div v-cloak>
+            <tinder
+                ref="tinder"
+                :queue.sync="queue"
+                @submit="submit" class="main__contant">
+                <template slot-scope="{data}" class="main__card">
+                    <img class="main__photo" :src="data.key">
+                    <h6 class="main__card-header">{{ data.key1 }}</h6>
+                    <p class="main__card-text">{{ data.key2 }}</p>
+                </template>
+                <img class="like-pointer" slot="nope" src="../assets/cheap1.png">
+                <img class="nope-pointer" slot="super" src="../assets/brand.png">
+                <img class="super-pointer" slot="like" src="../assets/teva.png">
+
+            </tinder>
+            <div class="main__btn-container">
+                    <a class="btn btn_small btn_first" v-on:click="a++, decide('nope'), next()">Препарат 1</a>
+                    <a class="btn btn_small btn_second" v-on:click="b++, decide('super'), next()">Препарат 2</a>
+                    <a class="btn btn_small btn_third" v-on:click="c++, decide('like'), next()">Препарат 3</a>
+            
+            </div>
         </div>
-         <div class="main__btn-container">
-            <a class="btn btn_small btn_first" v-on:click="a++, d--, mySwipe(0, patients.id, this)">Препарат 1</a>
-            <a class="btn btn_small btn_second" v-on:click="b++, d--">Препарат 2</a>
-            <a class="btn btn_small btn_third" v-on:click="c++, d--">Препарат 3</a>
-        </div>
-    </div>
+<!--       
+    </div> -->
    
   </div>
 </template>
 
 <script>
+import tinder from 'vue-tinder';
 
 export default {
     name: 'main',
+    components: {
+      tinder
+    },
     data(){
         return {
             a: 0,
             b: 0, 
             c: 0,
             d: 15,
+            queue: [],
             patients: [
                 {
                     id: 0,
                     title: "Валентина, 75 років",
                     text: "Дитя, дай бабусі ліки від тиску за цим рецептом, але не дорогих, тих, що дешевші!",
-                    srcImage: require("../assets/p1.png")
+                    srcImage: require("../assets/p1.jpg"),
+                    show: true
                 },
                 {   
                     id: 1,
                     title: "Марія, 19 років",
                     text: "Бабуся приймає брендовий препарат від болю в суглобах, він допомагає, але занадто дорогий. У Вас є якісний аналог з нижчою ціною? Якщо ні — давайте бренд.",
-                    srcImage: require("../assets/p2.jpg")
+                    srcImage: require("../assets/p2.jpg"),
+                    show: false
                 },
                 {
                     id: 2,
                     title: "Степан, 61 рік",
                     text: "Спросоння відсунув гарячий чайник рукою та обпікся. У Вас всі ліки від опіків такі дорогі? Можна хороший препарат недорого?",
-                    srcImage: require("../assets/p3.jpg")
+                    srcImage: require("../assets/p3.jpg"),
+                    show: false
                 },
                 {
                     id: 3,
                     title: "Любов, 58 років",
                     text: "Лікар призначив препарат від артеріальної гіпертензії, а бренд дорого коштує. Тому мені потрібен аналог з хорошою ефективністю та приємною ціною.",
-                    srcImage: require("../assets/p4.jpg")
+                    srcImage: require("../assets/p4.jpg"),
+                    show: false
                 },
                 {
                     id: 4,
                     title: "Олександр, 20 років",
                     text: "Порекомендуйте ефективний препарат від болю в горлі за розумну ціну.",
-                    srcImage: require("../assets/p5.jpg")
+                    srcImage: require("../assets/p5.jpg"),
+                    show: false
                 },
                 {
                     id: 5,
                     title: "Ірина, 55 років",
                     text: "У мене часто невралгії, лікар призначив вітаміни групи В. Мені потрібен якісний аналог за прийнятною ціною.",
-                    srcImage: require("../assets/p6.jpg")
+                    srcImage: require("../assets/p6.jpg"),
+                    show: false 
                 }
             ],
         }
     },
+    created () {
+        this.getData()
+    },
     methods: {
-
         reload: function(){
             this.a = 0,
             this.b = 0,
             this.c = 0,
             this.d = 15
+            
         },
-        mySwipe: function(x, y, z) {
-            console.log(x, y, z)
-            // this.srcImage = "../assets/p2.jpg"
-        }
+        next: function() {
+            this.d--;
+           
+            if(this.d == 9) {
+                this.$router.push({ path: 'final' })
+            }
+        },
+         getData: function () {
+            const list = []
+            for (let i = 0; i < 6; i++) {
+                list.push({
+                    key: this.patients[i].srcImage,
+                    key1: this.patients[i].title,
+                    key2: this.patients[i].text
+                })
+            }
+            this.queue = this.queue.concat(list)
+        },
+        decide: function (choice) {
+            this.$refs.tinder.decide(choice)
+        },
+         submit: function (choice) {
+            switch (choice) {
+                case 'nope': 
+                break;
+                case 'like': 
+                break;
+                case 'super': 
+                break;
+            }
+            if (this.queue.length < 2) {
+                this.getData()
+            }
+            }
     }
 }
 </script>
@@ -210,15 +274,6 @@ export default {
             font-size: 38px;
         }
     }
-    &__card {
-        position: relative;
-        width: 540px;
-        height: 590px;
-        background: #FFFFFF;
-        box-shadow: 0px 0px 40px rgba(127, 127, 127, 0.4);
-        margin: 130px auto 170px;
-        border-radius: 40px;
-    }
     &__card-header {
         font-size: 32px;
         line-height: 39px;
@@ -234,8 +289,43 @@ export default {
     &__btn-container {
         display: flex;
     }
-    &__photo {
-        border-radius: 40px 40px 0 0;
-    }
   }
+
+// vue-tinder
+[v-cloak] { display: none; }
+
+.vue-tinder {
+    z-index: 1;
+    position: relative;
+    width: 540px;
+    height: 590px;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 40px rgba(127, 127, 127, 0.4);
+    margin: 130px auto 170px;
+    border-radius: 40px;
+}
+
+.nope-pointer { right: 10px; }
+.like-pointer { left: 10px; }
+.nope-pointer,
+.like-pointer {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    width: 360px;
+    height: 120px;
+ 
+}
+.super-pointer {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 360px;
+    height: 120px;
+}
+
+
 </style>
