@@ -10,20 +10,20 @@
             <div class="main__params">
                 <div class="main__param-item">
                 <img src="../assets/sad_icon.png" alt="icon" class="main__param-img">
-                <span class="main__count">{{ a }}</span>
+                <span class="main__count">{{ firstDrug }}</span>
                 </div>
                 <div class="main__param-item">
                     <img src="../assets/happy_icon.png" alt="icon" class="main__param-img">
-                    <span class="main__count">{{ b }}</span>
+                    <span class="main__count">{{ secondDrug }}</span>
                 </div>
                 <div class="main__param-item">
                     <img src="../assets/heart_icon.png" alt="icon" class="main__param-img">
-                    <span class="main__count">{{ c }}</span>
+                    <span class="main__count">{{ thirdDrug }}</span>
                 </div>
             </div>
         </div>
         <div class="main__aside-footer">
-            <p class="main__aside-text">Осталось в очереди: <br/> <span class="main__aside-text main__aside-text_bold">{{ d }}</span>/15</p>
+            <p class="main__aside-text">Осталось в очереди: <br/> <span class="main__aside-text main__aside-text_bold">{{ max }}</span>/15</p>
         </div>
     </div>
     <!-- <div class="main__contant"> -->
@@ -50,9 +50,9 @@
 
             </tinder>
             <div class="main__btn-container">
-                    <a class="btn btn_small btn_first" v-on:click="a++, decide('nope'), next()">Препарат 1</a>
-                    <a class="btn btn_small btn_second" v-on:click="b++, decide('super'), next()">Препарат 2</a>
-                    <a class="btn btn_small btn_third" v-on:click="c++, decide('like'), next()">Препарат 3</a>
+                    <a class="btn btn_small btn_first" v-on:click="firstDrugIncrease(), decide('nope'), next()">Препарат 1</a>
+                    <a class="btn btn_small btn_second" v-on:click="secondDrugIncrease(), decide('super'), next()">Препарат 2</a>
+                    <a class="btn btn_small btn_third" v-on:click="thirdDrugIncrease(), decide('like'), next()">Препарат 3</a>
             
             </div>
         </div>
@@ -65,6 +65,9 @@
 <script>
 import tinder from 'vue-tinder';
 
+import {mapGetters} from "vuex";
+import {mapActions} from "vuex";
+
 export default {
     name: 'main',
     components: {
@@ -72,10 +75,7 @@ export default {
     },
     data(){
         return {
-            a: 0,
-            b: 0, 
-            c: 0,
-            d: 15,
+        
             queue: [],
             patients: [
                 {
@@ -120,24 +120,31 @@ export default {
                     srcImage: require("../assets/p6.jpg"),
                     show: false 
                 }
-            ],
+            ]
+            
         }
     },
     created () {
         this.getData()
     },
+    computed: {
+      ...mapGetters([
+        "firstDrug",
+        "secondDrug",
+        "thirdDrug",
+        "max",
+        "sum"
+      ])
+    },
     methods: {
-        reload: function(){
-            this.a = 0,
-            this.b = 0,
-            this.c = 0,
-            this.d = 15
-            
-        },
+        ...mapActions([
+            "firstDrugIncrease",
+            "secondDrugIncrease",
+            "thirdDrugIncrease",
+            "reload"
+        ]),
         next: function() {
-            this.d--;
-           
-            if(this.d == 9) {
+            if(this.max == 9) {
                 this.$router.push({ path: 'final' })
             }
         },

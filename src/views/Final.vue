@@ -35,8 +35,7 @@ export default {
   name: 'final_easy',
    components: {
     Btn
-  },
-  props: ['a']
+  }
 }
 </script>
 
