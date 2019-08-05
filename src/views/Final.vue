@@ -24,7 +24,7 @@
         <p class="final__par">Это тестовое задание, так что не будем углубляться в глубины проблем фармацевтов.</p>
       </div>
     </div>
-    <router-link to="/main" v-on:click="reload()" ><Btn msg="Попробовать еще" class="btn btn_grey" /></router-link>
+    <router-link to="/main" v-on:click.native="reload()" ><Btn msg="Попробовать еще" class="btn btn_grey" /></router-link>
   </div>
 </template>
 

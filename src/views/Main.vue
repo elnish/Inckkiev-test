@@ -315,7 +315,7 @@ export default {
 .like-pointer {
     position: absolute;
     z-index: 2;
-    top: 0;
+    top: 200px;
     width: 360px;
     height: 120px;
  
@@ -323,7 +323,7 @@ export default {
 .super-pointer {
     position: absolute;
     z-index: 2;
-    top: 0;
+    top: 200px;
     left: 0;
     right: 0;
     margin: auto;
