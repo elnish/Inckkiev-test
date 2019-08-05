@@ -23,23 +23,30 @@ export default new Vuex.Store({
     max(state) {
       return state.max;
     },
-    sum(state) {
-      return state.firstDrug + state.secondDrug + state.thirdDrug;
+    firstPercent(state) {
+      return (Math.round(100 * (state.firstDrug / 6)));
+    },
+    secondPercent(state) {
+      return (Math.round(100 * (state.secondDrug / 6)));
+    },
+    thirdPercent(state) {
+      return (Math.round(100 * (state.thirdDrug / 6)));
     }
   },
   mutations: {
-    firstDrugIncrease(state) {
+    firstInc(state) {
       state.firstDrug++;
       state.max--;
     },
-    secondDrugIncrease(state) {
+    secondInc(state) {
       state.secondDrug++;
       state.max--;
     },
-    thirdDrugIncrease(state) {
+    thirdInc(state) {
       state.thirdDrug++;
       state.max--;
     },
+
     reload(state) {
       state.firstDrug = 0;
       state.secondDrug = 0;
@@ -48,17 +55,18 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    firstDrugIncrease(store) {
-      store.commit("firstDrugIncrease");
+    firstInc(store) {
+      store.commit("firstInc");
     },
-    secondDrugIncrease(store) {
-      store.commit("secondDrugIncrease");
+    secondInc(store) {
+      store.commit("secondInc");
     },
-    thirdDrugIncrease(store) {
-      store.commit("thirdDrugIncrease");
+    thirdInc(store) {
+      store.commit("thirdInc");
     },
+ 
     reload(store) {
       store.commit("reload");
-    }
+    },
   }
-})
+});

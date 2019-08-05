@@ -5,15 +5,15 @@
     <div class="final__results-container">
       <div class="final__results">
         <div class="final__result-item">
-          <p class="final__text">100%</p>
+          <p class="final__text">{{firstPercent}}%</p>
           <p class="final__text final__text_small">Препарат 1</p>
         </div>
         <div class="final__result-item">
-          <p class="final__text">100%</p>
+          <p class="final__text">{{secondPercent}}%</p>
           <p class="final__text final__text_small">Препарат 2</p>
         </div>
         <div class="final__result-item">
-          <p class="final__text">100%</p>
+          <p class="final__text">{{thirdPercent}}%</p>
           <p class="final__text final__text_small">Препарат 3</p>
         </div>
       </div>
@@ -24,18 +24,32 @@
         <p class="final__par">Это тестовое задание, так что не будем углубляться в глубины проблем фармацевтов.</p>
       </div>
     </div>
-    <router-link to="/main"><Btn msg="Попробовать еще" class="btn btn_grey"/></router-link>
+    <router-link to="/main" v-on:click="reload()" ><Btn msg="Попробовать еще" class="btn btn_grey" /></router-link>
   </div>
 </template>
 
 <script>
 import Btn from '@/components/Btn.vue'
+import {mapGetters} from "vuex";
+import {mapActions} from "vuex";
 
 export default {
   name: 'final_easy',
-   components: {
-    Btn
-  }
+      components: {
+      Btn
+  },
+  computed: {
+      ...mapGetters([
+        "firstPercent",
+        "secondPercent",
+        "thirdPercent"
+      ])
+  },
+  methods: {
+      ...mapActions([
+        "reload"
+      ])
+    }
 }
 </script>
 

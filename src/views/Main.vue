@@ -50,10 +50,9 @@
 
             </tinder>
             <div class="main__btn-container">
-                    <a class="btn btn_small btn_first" v-on:click="firstDrugIncrease(), decide('nope'), next()">Препарат 1</a>
-                    <a class="btn btn_small btn_second" v-on:click="secondDrugIncrease(), decide('super'), next()">Препарат 2</a>
-                    <a class="btn btn_small btn_third" v-on:click="thirdDrugIncrease(), decide('like'), next()">Препарат 3</a>
-            
+                <a class="btn btn_small btn_first" v-on:click="firstInc(), decide('nope'), next()">Препарат 1</a>
+                <a class="btn btn_small btn_second" v-on:click="secondInc(), decide('super'), next()">Препарат 2</a>
+                <a class="btn btn_small btn_third" v-on:click="thirdInc(), decide('like'), next()">Препарат 3</a>
             </div>
         </div>
 <!--       
@@ -75,7 +74,6 @@ export default {
     },
     data(){
         return {
-        
             queue: [],
             patients: [
                 {
@@ -132,15 +130,14 @@ export default {
         "firstDrug",
         "secondDrug",
         "thirdDrug",
-        "max",
-        "sum"
+        "max"
       ])
     },
     methods: {
         ...mapActions([
-            "firstDrugIncrease",
-            "secondDrugIncrease",
-            "thirdDrugIncrease",
+            "firstInc",
+            "secondInc",
+            "thirdInc",
             "reload"
         ]),
         next: function() {
@@ -174,7 +171,7 @@ export default {
             if (this.queue.length < 2) {
                 this.getData()
             }
-            }
+        }
     }
 }
 </script>
@@ -290,7 +287,7 @@ export default {
     &__card-text {
         width: 420px;
         color: rgb(127, 127, 127);
-        font-size: 22px;
+        font-size: 20px;
         padding-left: 60px;
     }
     &__btn-container {
